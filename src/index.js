@@ -17,8 +17,8 @@ const myP5 = new p5(p => {
   const pulses = [0]
 
   // goal
-  const x = p.random(30, 470)
-  const y = p.random(30, 470)
+  const x = p.random(30, p.windowWidth - 30)
+  const y = p.random(30, p.windowHeight - 30)
 
   p.setup = () => {
     p.createCanvas(p.windowWidth, p.windowHeight)
