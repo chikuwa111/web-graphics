@@ -1,3 +1,5 @@
+/dist/*
+!/dist/.keep
+
 /node_modules
 yarn-error.log
-
