@@ -3,7 +3,6 @@ import * as PIXI from 'pixi.js'
 const stage = new PIXI.Container()
 
 const renderer = PIXI.autoDetectRenderer(640, 360, {
-  antialias: true,
   backgroundColor: 0x00ffd4,
 })
 
@@ -28,18 +27,42 @@ loader
       ))
     ))
 
-    const movePenguins = Array.from({length: 4}).map((_v, i) => {
-      const penguin = new PIXI.extras.AnimatedSprite(texturePenguins[i])
-      penguin.animationSpeed = 0.1
-      penguin.play()
-      return penguin
-    })
-    movePenguins[0].position.set(130, 130)
-    movePenguins[1].position.set(230, 130)
-    movePenguins[2].position.set(330, 130)
-    movePenguins[3].position.set(430, 130)
+    const elementPenguin = new PIXI.extras.AnimatedSprite(texturePenguins[3])
+    elementPenguin.animationSpeed = 0.1
+    elementPenguin.play()
 
-    stage.addChild(movePenguins[0], movePenguins[1], movePenguins[2], movePenguins[3])
+    elementPenguin.anchor.set(0.5)
+    elementPenguin.position.set(640 / 2, 360 / 2)
+
+    stage.addChild(elementPenguin)
+
+    document.addEventListener('keydown', e => {
+      const key = e.key
+      switch (key) {
+        case 'ArrowLeft':
+          elementPenguin.textures = texturePenguins[0]
+          elementPenguin.position.x -= 16
+          break
+        case 'ArrowUp':
+          elementPenguin.textures = texturePenguins[1]
+          elementPenguin.position.y -= 16
+          elementPenguin.scale.x /= 1.25
+          elementPenguin.scale.y /= 1.25
+          break
+        case 'ArrowRight':
+          elementPenguin.textures = texturePenguins[2]
+          elementPenguin.position.x += 16
+          break
+        case 'ArrowDown':
+          elementPenguin.textures = texturePenguins[3]
+          elementPenguin.position.y += 16
+          elementPenguin.scale.x *= 1.25
+          elementPenguin.scale.y *= 1.25
+          break
+        default:
+      }
+      elementPenguin.play()
+    })
   })
 
   loader.load()
